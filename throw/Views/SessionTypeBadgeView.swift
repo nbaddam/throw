@@ -45,9 +45,9 @@ class SessionTypeBadgeView: UIView {
         ])
     }
     
-    func configure(with sessionType: SessionType) {
+    func configure(with sessionType: SessionType, for darkMode: Bool = false) {
         label.text = sessionType.displayName
-        label.textColor = sessionType.textColor
-        backgroundColor = sessionType.backgroundColor
+        label.textColor = darkMode ? .white : sessionType.textColor
+        backgroundColor = darkMode ? sessionType.textColor : sessionType.backgroundColor
     }
 }

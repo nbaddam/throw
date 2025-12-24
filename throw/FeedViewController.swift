@@ -13,12 +13,13 @@ class FeedViewController: UIViewController {
     let sessions: [Session] = {
         let currentDateTime = Date()
         let week = 604800.00
+        let myImages = [UIImage(named: "First_Cup_Thrown")!, UIImage(named: "First_Vase_Thrown")!]
         
         var s = [
-            Session(title: "First class", date: Date(timeInterval: -(week*2), since: currentDateTime), types: [.throwing, .trimming, .glazing, .firing, .handbuilding], body: "Today I had my first class and we learned how to center clay!", image: UIImage(named: "Pottery1")),
-            Session(title: "Second throwing attempt", date: Date(timeInterval: -week, since: currentDateTime), types: [.throwing], image: UIImage(named: "Pottery1")),
-            Session(title: "The time I realized the importance of centering", date: Date(timeInterval: -week, since: currentDateTime), types: [.trimming], image: UIImage(named: "Pottery1")),
-            Session(title: "Trimming extravanganza!", date: currentDateTime, types: [.trimming], image: UIImage(named: "Pottery1"))
+            Session(title: "First class", date: Date(timeInterval: -(week*2), since: currentDateTime), types: [.throwing, .trimming, .glazing, .firing, .handbuilding], body: "Today I had my first class and we learned how to center clay!", images: myImages),
+            Session(title: "Second throwing attempt", date: Date(timeInterval: -week, since: currentDateTime), types: [.throwing], images: myImages),
+            Session(title: "The time I realized the importance of centering", date: Date(timeInterval: -week, since: currentDateTime), types: [.trimming], images: myImages),
+            Session(title: "Trimming extravanganza!", date: currentDateTime, types: [.trimming], images: myImages)
         ]
         
         return s
@@ -74,7 +75,7 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedSession = sessions[indexPath.item]
         let detailsVC = SessionDetailsViewController()
-        detailsVC.session = selectedSession
+        detailsVC.configure(with: selectedSession)
         navigationController?.pushViewController(detailsVC, animated: true)
     }
     

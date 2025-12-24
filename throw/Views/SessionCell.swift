@@ -10,19 +10,7 @@ import UIKit
 class SessionCell: UICollectionViewCell {
     let padding: CGFloat = 18
     
-    let imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        imageView.clipsToBounds = true
-        imageView.layer.masksToBounds = true
-        
-        imageView.layer.borderColor = UIColor.white.cgColor
-        imageView.layer.borderWidth = 4.0
-        imageView.layer.cornerRadius = 16
-        
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
+    let rightImageView = RightImageView()
     
     let leftSummaryView = LeftSummaryView()
     
@@ -37,7 +25,7 @@ class SessionCell: UICollectionViewCell {
     }
     
     func setupCell() {
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = UIColor.secondarySystemBackground
         self.layer.cornerRadius = 16
         
         // setup chadow under cell
@@ -49,27 +37,28 @@ class SessionCell: UICollectionViewCell {
     }
     
     func setupViews() {
-        contentView.addSubview(imageView)
+        contentView.addSubview(rightImageView)
         contentView.addSubview(leftSummaryView)
         
         NSLayoutConstraint.activate([
             leftSummaryView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
             leftSummaryView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
-            leftSummaryView.trailingAnchor.constraint(equalTo: imageView.leadingAnchor, constant: -padding),
+            leftSummaryView.trailingAnchor.constraint(equalTo: rightImageView.leadingAnchor, constant: -padding),
             
-            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
-            imageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            imageView.widthAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.7),
-            imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor)
+            rightImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
+            rightImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            rightImageView.widthAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.7),
+            rightImageView.heightAnchor.constraint(equalTo: rightImageView.widthAnchor)
         ])
-        
-        let rotationAngle: CGFloat = 5 * .pi / 180
-        imageView.transform = CGAffineTransform(rotationAngle: rotationAngle)
     }
         
     func configure(with session: Session) {
         leftSummaryView.configure(title: session.title, date: session.date.formattedForDisplay(), sessionTypes: session.types)
         
-        imageView.image = session.image?.squared
+        guard let images = session.images else {
+            return
+        }
+        
+        rightImageView.configure(images: images)
     }
 }

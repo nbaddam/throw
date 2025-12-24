@@ -14,18 +14,18 @@ struct Session {
     var date: Date
     var types: [SessionType]
     var body: String?
-    var image: UIImage?
+    var images: [UIImage]?
     
     init(title: String,
          date: Date,
          types: [SessionType],
          body: String? = nil,
-         image: UIImage? = nil) {
+         images: [UIImage]? = nil) {
         
         self.title = title
         self.date = date
         self.body = body
-        self.image = image
+        self.images = images
     
         // additional processing of properties
         self.types = Array(types.uniqued())
@@ -53,21 +53,21 @@ enum SessionType: String, Codable {
     
     var backgroundColor: UIColor {
         switch self {
-        case .throwing: return UIColor.systemBrown.withAlphaComponent(0.15)
-        case .trimming: return UIColor.systemOrange.withAlphaComponent(0.15)
-        case .glazing: return UIColor.systemBlue.withAlphaComponent(0.15)
-        case .firing: return UIColor.systemRed.withAlphaComponent(0.15)
-        case .handbuilding: return UIColor.systemGreen.withAlphaComponent(0.15)
+        case .throwing: return .kaleBackground
+        case .trimming: return .eggplantBackground
+        case .glazing: return .butterflyPeaFlowerBackground
+        case .firing: return .tomatoBackground
+        case .handbuilding: return .taroBackground
         }
     }
     
     var textColor: UIColor {
         switch self {
-        case .throwing: return .systemBrown
-        case .trimming: return .systemOrange
-        case .glazing: return .systemBlue
-        case .firing: return .systemRed
-        case .handbuilding: return .systemGreen
+        case .throwing: return .kale
+        case .trimming: return .eggplant
+        case .glazing: return .butterflyPeaFlower
+        case .firing: return .tomato
+        case .handbuilding: return .taro
         }
     }
 }

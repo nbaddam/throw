@@ -9,7 +9,7 @@ import UIKit
 
 class LeftSummaryView: UIView {
     
-    let titleLabel: UILabel = {
+    lazy var titleLabel: UILabel = {
         let label = UILabel()
         
         label.font = UIFont.preferredFont(forTextStyle: .title2)
@@ -20,7 +20,7 @@ class LeftSummaryView: UIView {
         return label
     }()
     
-    let dateLabel: UILabel = {
+    lazy var dateLabel: UILabel = {
         let label = UILabel()
         
         label.font = UIFont.preferredFont(forTextStyle: .caption1)
@@ -31,14 +31,14 @@ class LeftSummaryView: UIView {
         return label
     }()
     
-    let badgeScrollView: UIScrollView = {
+    lazy var badgeScrollView: UIScrollView = {
         let scroll = UIScrollView()
         scroll.showsHorizontalScrollIndicator = false
         scroll.translatesAutoresizingMaskIntoConstraints = false
         return scroll
     }()
     
-    let badgeStackView: UIStackView = {
+    lazy var badgeStackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
         stack.distribution = .fillProportionally
