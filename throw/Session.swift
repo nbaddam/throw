@@ -9,18 +9,18 @@ import Foundation
 import Algorithms
 import UIKit
 
-struct Session {
+class Session {
     var title: String
     var date: Date
     var types: [SessionType]
     var body: String?
-    var images: [UIImage]?
+    var images: [UIImage]
     
     init(title: String,
          date: Date,
          types: [SessionType],
          body: String? = nil,
-         images: [UIImage]? = nil) {
+         images: [UIImage] = []) {
         
         self.title = title
         self.date = date

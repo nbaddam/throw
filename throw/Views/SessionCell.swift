@@ -54,11 +54,6 @@ class SessionCell: UICollectionViewCell {
         
     func configure(with session: Session) {
         leftSummaryView.configure(title: session.title, date: session.date.formattedForDisplay(), sessionTypes: session.types)
-        
-        guard let images = session.images else {
-            return
-        }
-        
-        rightImageView.configure(images: images)
+        rightImageView.configure(images: session.images)
     }
 }

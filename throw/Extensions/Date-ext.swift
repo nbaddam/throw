@@ -54,4 +54,12 @@ extension Date {
         
         return formatter.string(from: self)
     }
+    
+    static func getRandomDate() -> Date {
+        let currentDateTime = Date()
+        let week = 604800.00
+        let randNumber = Double.random(in: 0..<5)
+        
+        return Date(timeInterval: -(randNumber*week), since: currentDateTime)
+    }
 }

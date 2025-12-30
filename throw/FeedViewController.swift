@@ -10,21 +10,20 @@ import UIKit
 class FeedViewController: UIViewController {
     
     var collectionView: UICollectionView!
-    let sessions: [Session] = {
-        let currentDateTime = Date()
-        let week = 604800.00
-        let myImages = [UIImage(named: "First_Cup_Thrown")!, UIImage(named: "First_Vase_Thrown")!]
-        
-        var s = [
-            Session(title: "First class", date: Date(timeInterval: -(week*2), since: currentDateTime), types: [.throwing, .trimming, .glazing, .firing, .handbuilding], body: "Today I had my first class and we learned how to center clay!", images: myImages),
-            Session(title: "Second throwing attempt", date: Date(timeInterval: -week, since: currentDateTime), types: [.throwing], images: myImages),
-            Session(title: "The time I realized the importance of centering", date: Date(timeInterval: -week, since: currentDateTime), types: [.trimming], images: myImages),
-            Session(title: "Trimming extravanganza!", date: currentDateTime, types: [.trimming], images: myImages)
-        ]
-        
-        return s
-    }()
-
+    var sessions: [Session]
+    private let dataSource: SessionsDataSource
+    
+    
+    init(dataSource: SessionsDataSource) {
+        self.dataSource = dataSource
+        self.sessions = dataSource.allSessions
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
                 

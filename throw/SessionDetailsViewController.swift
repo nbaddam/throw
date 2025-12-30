@@ -14,16 +14,9 @@ class SessionDetailsViewController: UIViewController {
     
     let padding: CGFloat = 20
     
-    let titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.preferredFont(forTextStyle: .title2)
-        label.textAlignment = .left
-        label.numberOfLines = 0
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    lazy var detailView = PostDetailView()
     
-    let imageCarousel: CarouselView = {
+    lazy var imageCarousel: CarouselView = {
         let c = CarouselView()
         c.translatesAutoresizingMaskIntoConstraints = false
         return c
@@ -31,29 +24,35 @@ class SessionDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(titleLabel)
+        setupViews()
+    }
+    
+    func setupViews() {
+        view.addSubview(detailView)
         view.addSubview(imageCarousel)
+        view.backgroundColor = .systemBackground
         imageCarousel.scrollView.delegate = self
         
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: padding),
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            detailView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: padding),
+            detailView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            detailView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             
-            imageCarousel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: padding),
+            imageCarousel.topAnchor.constraint(equalTo: detailView.bottomAnchor, constant: padding),
             imageCarousel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             imageCarousel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             imageCarousel.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -padding*2),
             imageCarousel.heightAnchor.constraint(equalTo: imageCarousel.widthAnchor)
         ])
         
-        let items = createCarouselItems(with: session.images ?? [])
-        imageCarousel.setItems(items)
+        // needs to happen at this point otherwise it could try to unwrap a nil object
+        let items = createCarouselItems(with: session.images)
+        self.imageCarousel.setItems(items)
     }
     
     func configure(with session: Session) {
         self.session = session
-        titleLabel.text = session.title
+        self.detailView.configure(title: session.title, date: session.date.formattedForDisplay(), sessionTypes: session.types)
     }
     
     func createCarouselItems(with images: [UIImage]) -> [UIImageView] {

@@ -15,7 +15,7 @@ class UserTabBarController: UITabBarController {
     }
     
     func configureTabs() {
-        let vc1 = FeedViewController()
+        let vc1 = FeedViewController(dataSource: SessionsDataSource())
         let vc2 = CreatePostViewController()
         
         vc1.tabBarItem.image = UIImage(systemName: "house")

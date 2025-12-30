@@ -1,20 +1,18 @@
 //
-//  LeftSummaryView.swift
+//  PostDetailView.swift
 //  throw
 //
-//  Created by Nitya Baddam on 11/24/25.
+//  Created by Nitya Baddam on 12/27/25.
 //
 
 import UIKit
 
-class LeftSummaryView: UIView {
+class PostDetailView: UIView {
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
-        
         label.font = UIFont.preferredFont(forTextStyle: .title2)
         label.textAlignment = .left
-        
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -22,11 +20,9 @@ class LeftSummaryView: UIView {
     
     lazy var dateLabel: UILabel = {
         let label = UILabel()
-        
         label.font = UIFont.preferredFont(forTextStyle: .caption1)
         label.textColor = .darkGray
         label.textAlignment = .left
-        
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -53,13 +49,13 @@ class LeftSummaryView: UIView {
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: topAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            titleLabel.trailingAnchor.constraint(equalTo: dateLabel.leadingAnchor, constant: 15),
             
-            dateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4),
-            dateLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            dateLabel.topAnchor.constraint(equalTo: titleLabel.topAnchor),
+            dateLabel.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 15),
             dateLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-
-            badgeScrollableView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 16),
+            
+            badgeScrollableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
             badgeScrollableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             badgeScrollableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             badgeScrollableView.bottomAnchor.constraint(equalTo: bottomAnchor)
