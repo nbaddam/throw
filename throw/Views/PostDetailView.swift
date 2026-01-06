@@ -49,7 +49,7 @@ class PostDetailView: UIView {
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: topAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            titleLabel.trailingAnchor.constraint(equalTo: dateLabel.leadingAnchor, constant: 15),
+            titleLabel.trailingAnchor.constraint(equalTo: dateLabel.leadingAnchor, constant: -15),
             
             dateLabel.topAnchor.constraint(equalTo: titleLabel.topAnchor),
             dateLabel.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 15),

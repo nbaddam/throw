@@ -21,6 +21,15 @@ class SessionDetailsViewController: UIViewController {
         c.translatesAutoresizingMaskIntoConstraints = false
         return c
     }()
+    
+    lazy var bodyLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .body)
+        label.textAlignment = .left
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +39,8 @@ class SessionDetailsViewController: UIViewController {
     func setupViews() {
         view.addSubview(detailView)
         view.addSubview(imageCarousel)
+        view.addSubview(bodyLabel)
+        
         view.backgroundColor = .systemBackground
         imageCarousel.scrollView.delegate = self
         
@@ -42,7 +53,11 @@ class SessionDetailsViewController: UIViewController {
             imageCarousel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             imageCarousel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             imageCarousel.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -padding*2),
-            imageCarousel.heightAnchor.constraint(equalTo: imageCarousel.widthAnchor)
+            imageCarousel.heightAnchor.constraint(equalTo: imageCarousel.widthAnchor),
+            
+            bodyLabel.topAnchor.constraint(equalTo: imageCarousel.bottomAnchor, constant: padding),
+            bodyLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            bodyLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
         ])
         
         // needs to happen at this point otherwise it could try to unwrap a nil object
@@ -53,6 +68,7 @@ class SessionDetailsViewController: UIViewController {
     func configure(with session: Session) {
         self.session = session
         self.detailView.configure(title: session.title, date: session.date.formattedForDisplay(), sessionTypes: session.types)
+        self.bodyLabel.text = session.body
     }
     
     func createCarouselItems(with images: [UIImage]) -> [UIImageView] {
@@ -61,6 +77,8 @@ class SessionDetailsViewController: UIViewController {
         for i in images {
             let imageView = UIImageView()
             imageView.image = i.squared
+            imageView.layer.masksToBounds = true
+            imageView.layer.cornerRadius = 16
             
             // by default, images in UIKit are decorative
             // make it an accessibility element and add a label - ideally users are able to add this label themselves, or VO/AI can help us generate temporary labels
