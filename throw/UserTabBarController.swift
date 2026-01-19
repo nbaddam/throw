@@ -17,16 +17,17 @@ class UserTabBarController: UITabBarController {
     func configureTabs() {
         let vc1 = FeedViewController(dataSource: SessionsDataSource())
         let vc2 = CreatePostViewController()
-        
+
         vc1.tabBarItem.image = UIImage(systemName: "house")
+        vc1.tabBarItem.title = "Feed" // adds label to tab bar item and adds accessibility label
+
         vc2.tabBarItem.image = UIImage(systemName: "plus")
-        
-        vc1.title = "Feed"
-        vc2.title = "Create"
-        
+        vc2.title = "Create" // not as reliable with adding visual label as tabBarItem.title
+        vc2.tabBarItem.accessibilityLabel = "Create"
+
         let nav1 = UINavigationController(rootViewController: vc1)
         let nav2 = UINavigationController(rootViewController: vc2)
-        
+
         setViewControllers([nav1, nav2], animated: true)
     }
 

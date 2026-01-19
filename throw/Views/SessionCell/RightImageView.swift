@@ -11,14 +11,6 @@ class RightImageView: UIView {
     
     private var hasMultipleImages: Bool = false
     
-//    lazy var imageStackView: UIStackView = {
-//        let s = UIStackView()
-//        s.translatesAutoresizingMaskIntoConstraints = false
-//        s.axis = .vertical
-//        s.distribution = .fillProportionally
-//        return s
-//    }()
-    
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit

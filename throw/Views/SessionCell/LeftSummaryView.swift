@@ -70,5 +70,6 @@ class LeftSummaryView: UIView {
         titleLabel.text = title
         dateLabel.text = date
         badgeScrollableView.configure(sessionTypes: sessionTypes)
+        self.accessibilityLabel = "Helloo this is my accessibility label"
     }
 }

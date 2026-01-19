@@ -1,5 +1,5 @@
 //
-//  SessionCell.swift
+//  SessionCollectionViewCell.swift
 //  throw
 //
 //  Created by Nitya Baddam on 11/17/25.
@@ -7,11 +7,10 @@
 
 import UIKit
 
-class SessionCell: UICollectionViewCell {
+class SessionCollectionViewCell: UICollectionViewCell {
     let padding: CGFloat = 18
     
     let rightImageView = RightImageView()
-    
     let leftSummaryView = LeftSummaryView()
     
     override init(frame: CGRect) {

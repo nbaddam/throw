@@ -42,20 +42,13 @@ class CarouselView: UIView {
     // Initial setup of the view
     private func setupView() {
         addSubview(scrollView)
-//        addSubview(pageControl)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-//        pageControl.translatesAutoresizingMaskIntoConstraints = false
-//        pageControl.addTarget(pageControl, action: #selector(pageControlTapped(_:)), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
             scrollView.topAnchor.constraint(equalTo: topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            
-//            pageControl.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: padding),
-//            pageControl.leadingAnchor.constraint(equalTo: leadingAnchor),
-//            pageControl.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
     }
     
